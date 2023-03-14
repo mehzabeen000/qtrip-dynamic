@@ -22,44 +22,6 @@ async function fetchCities() {
   }
 }
 
-//Implementation of DOM manipulation to add cities
-// function addCityToDOM(id, city, description, image) {
-//     // Create a new card element
-//     const card = document.createElement("div");
-//     card.classList.add("card", "col-sm-6", "col-lg-4", "mb-3");
-  
-//     // Create a new image element
-//     const img = document.createElement("img");
-//     img.src = image;
-//     img.classList.add("card-img-top");
-  
-//     // Create a new card body element
-//     const cardBody = document.createElement("div");
-//     cardBody.classList.add("card-body");
-  
-//     // Create a new card title element
-//     const cardTitle = document.createElement("h5");
-//     cardTitle.classList.add("card-title");
-//     cardTitle.textContent = city;
-  
-//     // Create a new card text element
-//     const cardText = document.createElement("p");
-//     cardText.classList.add("card-text");
-//     cardText.textContent = description;
-  
-//     // Append the title and text to the card body
-//     cardBody.appendChild(cardTitle);
-//     cardBody.appendChild(cardText);
-  
-//     // Append the image and card body to the card
-//     card.appendChild(img);
-//     card.appendChild(cardBody);
-  
-//     // Append the card to the "data" div element
-//     const dataDiv = document.getElementById("data");
-//     dataDiv.appendChild(card);
-// }
-
 function addCityToDOM(id, city, description, image) {
   // Get the container element to add the new city card
   const container = document.getElementById('data');
@@ -71,7 +33,7 @@ function addCityToDOM(id, city, description, image) {
   // Create the card link element
   const cardLink = document.createElement('a');
   cardLink.id = id;
-  cardLink.href = `/adventures/?city=${id}/`;
+  cardLink.href = `pages/adventures/?city=${id}`;
 
   // Create the card element
   const card = document.createElement('div');
