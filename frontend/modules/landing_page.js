@@ -15,7 +15,7 @@ async function init() {
 //Implementation of fetch call
 async function fetchCities() {
   try {
-    let response = await fetch("http://52.66.50.63:8082/cities");
+    let response = await fetch("http://3.6.3.160:8082/cities");
     return await response.json();
   } catch (err) {
     return null;
