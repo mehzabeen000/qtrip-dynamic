@@ -2,30 +2,61 @@ import config from "../conf/index.js";
 
 //Implementation of fetch call to fetch all reservations
 async function fetchReservations() {
-  // TODO: MODULE_RESERVATIONS
-  // 1. Fetch Reservations by invoking the REST API and return them
-
-
-  // Place holder for functionality to work in the Stubs
-  return null;
+  try {
+    let response = await fetch(
+      `http://65.2.67.204:8082/reservations`
+    );
+    return await response.json();
+  } catch (err) {
+    return null;
+}
 }
 
 //Function to add reservations to the table. Also; in case of no reservations, display the no-reservation-banner, else hide it.
 function addReservationToTable(reservations) {
-  // TODO: MODULE_RESERVATIONS
-  // 1. Add the Reservations to the HTML DOM so that they show up in the table
+  console.log(reservations)
 
-  //Conditionally render the no-reservation-banner and reservation-table-parent
+  const table = document.getElementById("reservation-table");
+  const banner = document.getElementById("no-reservation-banner");
+  const tableParent = document.getElementById("reservation-table-parent");
+  
+  if (reservations.length === 0) {
+    banner.style.display = "block";
+    tableParent.style.display = "none";
+  } else {
+    banner.style.display = "none";
+    tableParent.style.display = "block";
 
-  /*
-    Iterating over reservations, adding it to table (into div with class "reservation-table") and link it correctly to respective adventure
-    The last column of the table should have a "Visit Adventure" button with id=<reservation-id>, class=reservation-visit-button and should link to respective adventure page
+    for (const reservation of reservations) {
+      const row = table.insertRow();
+      const id = row.insertCell();
+      const name = row.insertCell();
+      const adventureName = row.insertCell();
+      const persons = row.insertCell();
+      const bookingDate = row.insertCell();
+      const price = row.insertCell();
+      const bookingTime = row.insertCell();
+      const visitButton = row.insertCell();
+      const visitLink = document.createElement("a");
 
-    Note:
-    1. The date of adventure booking should appear in the format D/MM/YYYY (en-IN format) Example:  4/11/2020 denotes 4th November, 2020
-    2. The booking time should appear in a format like 4 November 2020, 9:32:31 pm
-  */
-
+      const date = new Date(reservation.date).toLocaleDateString("en-IN", { year: 'numeric', month: 'numeric', day: 'numeric' });
+      const time = new Date(reservation.time).toLocaleDateString("en-IN", { year: 'numeric', month: 'long', day: 'numeric' }) + ", " + new Date(reservation.time).toLocaleTimeString("en-IN", { hour: 'numeric', minute: 'numeric', second: "numeric" });
+      
+      id.innerHTML = reservation.id;
+      name.innerHTML = reservation.name;
+      adventureName.innerHTML = reservation.adventureName;
+      persons.innerHTML = reservation.person;
+      bookingDate.innerHTML = date;
+      price.innerHTML = reservation.price;
+      bookingTime.innerHTML = time;
+      
+      visitButton.id = reservation.id;
+      visitLink.href = `/frontend/pages/adventures/detail/?adventure=${reservation.adventure}`;
+      visitLink.innerHTML = "Visit Adventure";
+      visitLink.classList.add("reservation-visit-button");
+      visitButton.appendChild(visitLink);
+    }
+  }
 }
 
 export { fetchReservations, addReservationToTable };

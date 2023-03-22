@@ -10,7 +10,7 @@ function getCityFromURL(search) {
 async function fetchAdventures(city) {
   try {
     let response = await fetch(
-      `http://3.6.3.160:8082/adventures?city=${city}`
+      `http://65.2.67.204:8082/adventures?city=${city}`
     );
     return await response.json();
   } catch (err) {

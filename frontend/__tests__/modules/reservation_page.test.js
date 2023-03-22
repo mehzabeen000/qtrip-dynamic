@@ -85,6 +85,7 @@ describe("Reservation Page Tests", function () {
       reservations.length
     );
     reservations.map((ele, idx) => {
+      console.log("fdngdf", document.getElementById(ele.id))
       expect(document.getElementById(ele.id).children[0].href).toEqual(
         expect.stringContaining(`detail/?adventure=${ele.adventure}`)
       );
